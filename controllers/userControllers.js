@@ -11,7 +11,7 @@ module.exports.registerUser = (reqBody) => {
 		address: reqBody.address,
 		mobileNo: reqBody.mobileNo,
 		email: reqBody.email,
-		password: brcypt.hashSync(reqBody.password, 10),
+		password: bcrypt.hashSync(reqBody.password, 10),
 	})
 
 	return newUser.save().then((user, error) => {
@@ -59,3 +59,4 @@ module.exports.checkUserDuplicate = (reqBody) => {
 		}
 	})
 }
+
