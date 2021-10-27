@@ -8,7 +8,7 @@ module.exports.createAccessToken = (user) => {
 		isAdmin: user.isAdmin
 	};
 
-	jwt.sign(data, secret, {})
+	return jwt.sign(data, secret, {})
 }
 
 module.exports.verify = (req, res, next) => {

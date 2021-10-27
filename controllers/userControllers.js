@@ -60,3 +60,56 @@ module.exports.checkUserDuplicate = (reqBody) => {
 	})
 }
 
+module.exports.userOrders = (reqParams) => {
+	return User.findById(reqParams.userId).then((result, error) => {
+		if (error) {
+			console.log("Error! Cannot get user's orders!");	// to be removed
+			return false;
+		}
+		else {
+			console.log("Retrieved user's orders successfully.");	// to be removed
+			return result.orderList;
+		}
+	})
+}
+
+module.exports.userCheckout = async (data) => {
+	let isUserUpdated = await User.findById(data.userId).then(user => {
+		user.orderList.push( { productId: data.productId } )
+
+		return user.save().then((user, error) => {
+			if (error) {
+				console.log("Error! Product was not ordered successfully by the user!");	// to be removed
+				return false;
+			}
+			else {
+				console.log("User has successfully ordered a product.");	// to be removed
+				return true;
+			}
+		})
+	})
+
+	let isProductUpdated = await Product.findById(data.productId).then(product => {
+		product.orderedBy.push( { userId: data.userId } )
+
+		return product.save().then((product, error) => {
+			if (error) {
+				console.log("Error! User was not able to order the product!");	// to be removed
+				return false;
+			}
+			else {
+				console.log("Product was ordered by the user.");	// to be removed
+				return true;
+			}
+		})
+	})
+
+	if (isUserUpdated && isProductUpdated) {
+		console.log("User and product documents have been successfully updated!");	// to be removed
+		return true;
+	}
+	else {
+		console.log("User and product documents update failed!");	// to be removed
+		return false;
+	}
+}

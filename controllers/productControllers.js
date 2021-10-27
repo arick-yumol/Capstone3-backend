@@ -72,7 +72,7 @@ module.exports.updateProduct = (reqParams, reqBody) => {
 		price: reqBody.price
 	}
 
-	return Product.findById(reqParams.productId, updatedProduct).then((result, error) => {
+	return Product.findByIdAndUpdate(reqParams.productId, updatedProduct).then((result, error) => {
 		if (error) {
 			console.log("Error! Cannot update product information!");	// to be removed
 			return false;
@@ -89,7 +89,7 @@ module.exports.archiveProduct = (reqParams) => {
 		onStock: false
 	}
 
-	return Product.findById(reqParams.productId, updatedProduct).then((result, error) => {
+	return Product.findByIdAndUpdate(reqParams.productId, updatedProduct).then((result, error) => {
 		if (error) {
 			console.log("Error! Cannot update product availability!");	// to be removed
 			return false;
@@ -106,7 +106,7 @@ module.exports.unarchiveProduct = (reqParams) => {
 		onStock: true
 	}
 
-	return Product.findById(reqParams.productId, updatedProduct).then((result, error) => {
+	return Product.findByIdAndUpdate(reqParams.productId, updatedProduct).then((result, error) => {
 		if (error) {
 			console.log("Error! Cannot update product availability!");	// to be removed
 			return false;
@@ -162,7 +162,7 @@ module.exports.updateProduct = (reqParams, reqBody) => {
 		price: reqBody.price
 	}
 
-	return Product.findById(reqParams.productId, updatedProduct).then((result, error) => {
+	return Product.findByIdAndUpdate(reqParams.productId, updatedProduct).then((result, error) => {
 		return (error) ? false : true
 	})
 }
@@ -170,7 +170,7 @@ module.exports.updateProduct = (reqParams, reqBody) => {
 module.exports.archiveProduct = (reqParams) => {
 	let productStatus = { onStock: false }
 
-	return Product.findById(reqParams.productId, productStatus).then((result, error) => {
+	return Product.findByIdAndUpdate(reqParams.productId, productStatus).then((result, error) => {
 		return (error) ? false : true
 	})
 }
@@ -178,7 +178,7 @@ module.exports.archiveProduct = (reqParams) => {
 module.exports.unarchiveProduct = (reqParams) => {
 	let productStatus = { onStock: true }
 
-	return Product.findById(reqParams.productId, productStatus).then((result, error) => {
+	return Product.findByIdAndUpdate(reqParams.productId, productStatus).then((result, error) => {
 		return (error) ? false : true
 	})
 }*/

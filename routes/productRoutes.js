@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productControllers');
-const auth = require = ('../auth');
+const auth = require('../auth');
 
 
 router.post('/add', auth.verify, (req, res) => {
@@ -65,7 +65,7 @@ router.put('/:productId/archive', auth.verify, (req, res) => {
 	}
 	else {
 		console.log("Error! User is not an admin!");	// to be removed
-		return false;
+		res.send(false);
 	}
 })
 
@@ -79,7 +79,7 @@ router.put('/:productId/unarchive', auth.verify, (req, res) => {
 	}
 	else {
 		console.log("Error! User is not an admin!");	// to be removed
-		return false;
+		res.send(false);
 	}
 })
 
